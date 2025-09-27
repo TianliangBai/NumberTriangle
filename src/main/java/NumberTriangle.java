@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -122,9 +123,7 @@ public class NumberTriangle {
         InputStream inputStream = NumberTriangle.class.getClassLoader().getResourceAsStream(fname);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
-//        List<NumberTriangle> pre = null;
-
-        // TODO define any variables that you want to use to store things
+        List<NumberTriangle> pre = null;
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -133,29 +132,26 @@ public class NumberTriangle {
         String line = br.readLine();
         while (line != null) {
 
-//            String[] item = line.trim().split("\\s+");
-//
-//            List<NumberTriangle> cur = new java.util.ArrayList<>();
-//            for (String it : item) {
-//                cur.add(new NumberTriangle(Integer.parseInt(it)));
-//            }
-//
-//            // connect with previous row
-//            if (pre != null) {
-//                for (int j = 0; j < pre.size(); j++) {
-//                    pre.get(j).setLeft(cur.get(j));
-//                    pre.get(j).setRight(cur.get(j + 1));
-//                }
-//            } else {
-//                // first row → top node
-//                top = cur.get(0);
-//            }
+            String[] item = line.trim().split("\\s+");
+
+            List<NumberTriangle> cur = new java.util.ArrayList<>();
+            for (String it : item) {
+                cur.add(new NumberTriangle(Integer.parseInt(it)));
+            }
+
+            if (pre != null) {
+                for (int j = 0; j < pre.size(); j++) {
+                    pre.get(j).setLeft(cur.get(j));
+                    pre.get(j).setRight(cur.get(j + 1));
+                }
+            } else {
+                top = cur.get(0);
+            }
 
             // remove when done; this line is included so running starter code prints the contents of the file
 //            System.out.println(line);
 
-            // TODO process the line
-
+            pre = cur;
             //read the next line
             line = br.readLine();
         }
